@@ -1,0 +1,69 @@
+# Byte-compiled / optimized / compiled files
+__pycache__/
+*.pyc
+*.pyd
+*.pyo
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE specific files
+.vscode/
+.idea/
+*.iml
+
+# FastAPI / Uvicorn related
+*.log
+uvicorn.log
+celerybeat-schedule # If using Celery Beat
+
+# Database files (if using a local SQLite for example)
+*.sqlite3
+db.sqlite3
+
+# Test / Coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook (if applicable)
+.ipynb_checkpoints
+
+# MyPy (if applicable)
+.mypy_cache/
+
+# PyInstaller (if applicable)
+*.manifest
+*.spec
