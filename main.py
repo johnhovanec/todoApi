@@ -11,14 +11,14 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-# Pydantic models
+########## Pydantic models ###########
 class TaskBase(BaseModel):
     id: int
     description: Optional[str] = None
     createdate: Optional[str] = None
     completiondate: Optional[str] = None
 
-# for reading (response)
+# for reading response
 class TaskOut(BaseModel):
     id: int
     description: Optional[str] = None
@@ -28,11 +28,15 @@ class TaskOut(BaseModel):
     class Config:
         from_attributes = True
 
-# for partial updates (PATCH)
+# for partial updates using PATCH
 class TaskUpdate(BaseModel):
     description: Optional[str] = None
     completiondate: Optional[datetime] = None
 
+# For creating a new task using POST
+class TaskCreate(BaseModel):
+    description: str
+    createdate: Optional[datetime] = None
 
 
 @app.get("/")
@@ -53,6 +57,7 @@ def read_task(id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Task detail not found")
     return task
 
+# PATCH update task by id
 @app.patch("/tasks/{id}", response_model=TaskOut)
 def update_task(id: int, db: Session = Depends(get_db)):
     # Get the task from DB by id to update
@@ -63,6 +68,19 @@ def update_task(id: int, db: Session = Depends(get_db)):
     # Set completiondate to now
     db_task.completiondate = datetime.now()
 
+    db.commit()
+    db.refresh(db_task)
+    return db_task
+
+# POST create a new task
+@app.post("/tasks/", response_model=TaskOut)
+def create_task(task: TaskCreate, db: Session = Depends(get_db)):
+    db_task = models.Task(
+        description = task.description,
+        createdate = datetime.now(),
+        completiondate =None
+    )
+    db.add(db_task)
     db.commit()
     db.refresh(db_task)
     return db_task
