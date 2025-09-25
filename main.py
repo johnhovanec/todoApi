@@ -84,3 +84,13 @@ def create_task(task: TaskCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_task)
     return db_task
+
+# DELETE task by id
+@app.delete("/tasks/{id}")
+def delete_task(id: int, db: Session = Depends(get_db)):
+    db_task = db.query(models.Task).filter(models.Task.id == id).first()
+    if not db_task:
+        raise HTTPException(status_code=404, detail="Task not found")
+    db.delete(db_task)
+    db.commit()
+    return {"detail": "Task deleted for id {}".format(id)}

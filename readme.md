@@ -34,6 +34,7 @@ Endpoints
 - `GET /` - Hello world
 - `GET /tasks/` - Returns all tasks from dbo.Task
 - `GET /tasks/{id}` - Returns a single task by id
-- `POST /addTask/` - Add a task to the database
+- `POST /tasks/` - Add a task to the database
 - `PATCH /tasks/{id}` - Marks a specific task as completed
+- `DELETE /tasks/{id}` - Deletes the specific task
 
