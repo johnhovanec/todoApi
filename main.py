@@ -12,7 +12,7 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"message": "Hello, FastAPI with MSSQL"}
+    return {"message": "Hello Todo API"}
 
 # GET all tasks
 @app.get("/tasks/")
