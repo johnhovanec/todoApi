@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime
 from database import Base
 
+# SQLAlchemy models
 class Task(Base):
     __tablename__ = "Task"  # table name in MSSQL
 
